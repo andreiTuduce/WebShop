@@ -7,20 +7,14 @@ namespace WebShop.Resource
 {
     public class CustomerDA
     {
-        private readonly Config config;
-        private readonly string selectFrom = "SELECT * FROM Customer WHERE ID = {0}";
-
-        public CustomerDA()
+        private readonly Config config = new Config
         {
-            config = new Config
-            {
-                ConnectionString = "Data Source=DESKTOP-IE1OTAU;Initial Catalog=WebShop;Integrated Security=True"
-            };
-        }
+            ConnectionString = "Data Source=DESKTOP-IE1OTAU;Initial Catalog=WebShop;Integrated Security=True"
+        };
 
         public Customer Select(Guid id)
         {
-            return DataAccessHelper.Select<Customer>(config, string.Format(selectFrom, id)).FirstOrDefault();
+            return DataAccessHelper.Select<Customer>(config, string.Format("SELECT * FROM Customer WHERE ID = {0}", id)).FirstOrDefault();
         }
 
         public void Insert(Customer customer)

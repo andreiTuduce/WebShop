@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShop.Infrastructure", "WebShop.Infrastructure\WebShop.Infrastructure.csproj", "{7707BA87-4E35-4AE5-8885-1D06DA34AFB2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{29563549-FE77-4A6A-9BCE-7163F62A9127}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{33AF1849-2F1F-4B69-B496-09CBFB78DFFE} = {29563549-FE77-4A6A-9BCE-7163F62A9127}
 		{7707BA87-4E35-4AE5-8885-1D06DA34AFB2} = {36235633-B9D3-4155-955F-BBA80421B82E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

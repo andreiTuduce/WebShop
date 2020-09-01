@@ -1,18 +1,30 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using WebShop.Infrastructure;
 using WebShop.Model;
 
 namespace WebShop.Resource
 {
-    public class CustomerDA
+    public interface ICustomerDA
+    {
+        Customer SelectByID(Guid id);
+
+        void Insert(Customer customer);
+
+        void Update(Customer customer);
+
+        void Delete(Guid id);
+    }
+
+    public class CustomerDA: ICustomerDA
     {
         private readonly Config config = new Config
         {
-            ConnectionString = "Data Source=DESKTOP-IE1OTAU;Initial Catalog=WebShop;Integrated Security=True"
+            ConnectionString = ConfigurationManager.AppSettings["ConnectionString"]
         };
 
-        public Customer Select(Guid id)
+        public Customer SelectByID(Guid id)
         {
             return DataAccessHelper.Select<Customer>(config, string.Format("SELECT * FROM Customer WHERE ID = {0}", id)).FirstOrDefault();
         }

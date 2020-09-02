@@ -1,20 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebShop.Infrastructure;
 using WebShop.Model;
 
 namespace WebShop.Resource
 {
-    public class ProductReviewDA
+    public interface IProductReviewDA
+    {
+        ProductReview SelectByID(Guid id);
+
+        void Insert(ProductReview productReview);
+
+        void Update(ProductReview productReview);
+
+        void Delete(Guid id);
+    }
+
+    public class ProductReviewDA : IProductReviewDA
     {
 
         private readonly Config config = new Config
         {
-
             ConnectionString = ConfigurationManager.AppSettings["ConnectionString"]
         };
 

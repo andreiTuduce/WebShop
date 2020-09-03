@@ -31,7 +31,7 @@ namespace WebShop.Resource
 
         public void Insert(Customer customer)
         {
-            string sql = string.Format("INSERT INTO Customer(ID, FirstName, LastName, Type) VALUES ('{0}', '{1}', '{2}', {3})", customer.ID, customer.FirstName, customer.LastName, (int)customer.CustomerType);
+            string sql = string.Format("INSERT INTO Customer(ID, FirstName, LastName, Type, Password) VALUES ('{0}', '{1}', '{2}', {3}, '{4}')", customer.ID, customer.FirstName, customer.LastName, (int)customer.CustomerType, customer.Password);
 
             DataAccessHelper.Insert(config, sql);
         }

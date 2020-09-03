@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebShop.Infrastructure;
 using WebShop.Manager;
+using WebShop.Model;
 
 namespace WSView
 {
@@ -24,17 +25,32 @@ namespace WSView
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly TestClass testClass;
+        private readonly CustomerManager customerManager;
 
         public MainWindow()
         {
             InitializeComponent();
-            testClass = new TestClass();
+            customerManager = new CustomerManager();
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
-            testClass.TestMethod();
+
+            string firstName = FirstName.Text;
+            string lastName = LastName.Text;
+            string password = Password.Password.GetHashedString();
+            string confirmPassword = ConfirmPassword.Password.GetHashedString();
+
+
+            if (password == confirmPassword)
+                customerManager.CreateCustomer(new Customer
+                {
+                    ID = Guid.NewGuid(),
+                    FirstName = firstName,
+                    LastName = lastName,
+                    CustomerType = CustomerType.New,
+                    Password = password
+                });
         }
     }
 }

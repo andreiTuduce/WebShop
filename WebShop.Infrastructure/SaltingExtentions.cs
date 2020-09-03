@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WebShop.Infrastructure
+{
+    public static class SaltingExtentions
+    {
+
+        private static readonly string toSaltValue = "QwzWSdfAWdc12ZSSAWy";
+
+        public static string GetHashedString(this string str)
+        {
+            return Convert.ToBase64String(Hash(Encoding.UTF8.GetBytes(str), Encoding.UTF8.GetBytes(toSaltValue)));
+        }
+
+        private static byte[] Hash(byte[] password, byte[] salt)
+        {
+            byte[] saltedValue = password.Concat(salt).ToArray();
+
+            return new SHA256Managed().ComputeHash(saltedValue);
+        }
+    }
+}

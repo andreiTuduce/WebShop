@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WSView"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="530" Width="900">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="449,218,0,0" VerticalAlignment="Top" Width="75" Click="OnClick"/>
-
+        <TextBox x:Name="FirstName" HorizontalAlignment="Left" Height="23" Margin="377,120,0,0" TextWrapping="Wrap" Text="FN" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="LastName" HorizontalAlignment="Left" Height="23" Margin="377,148,0,0" TextWrapping="Wrap" Text="LN" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Username" HorizontalAlignment="Left" Height="23" Margin="377,176,0,0" TextWrapping="Wrap" Text="UN" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="Password" HorizontalAlignment="Left" Height="23" Margin="377,204,0,0" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="ConfirmPassword" HorizontalAlignment="Left" Height="23" Margin="377,232,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Register" HorizontalAlignment="Left" Margin="402,260,0,0" VerticalAlignment="Top" Width="75" Click="OnClick"/>
     </Grid>
 </Window>

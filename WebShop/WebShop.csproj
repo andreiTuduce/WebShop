@@ -44,23 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\Order.cs" />
-    <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\ProductReview.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource\CustomerDA.cs" />
-    <Compile Include="Resource\OrderDA.cs" />
-    <Compile Include="Resource\ProductDA.cs" />
-    <Compile Include="Resource\ProductReviewDA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Manager\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\WebShop.Infrastructure\WebShop.Infrastructure.csproj">
       <Project>{7707BA87-4E35-4AE5-8885-1D06DA34AFB2}</Project>

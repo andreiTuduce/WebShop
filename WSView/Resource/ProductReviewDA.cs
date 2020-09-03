@@ -22,7 +22,7 @@ namespace WebShop.Resource
 
         private readonly Config config = new Config
         {
-            ConnectionString = ConfigurationManager.AppSettings["ConnectionString"]
+            ConnectionString = ConfigurationManager.ConnectionStrings[0].ConnectionString
         };
 
         public ProductReview SelectByID(Guid id)

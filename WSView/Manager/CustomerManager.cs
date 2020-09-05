@@ -6,20 +6,27 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using WebShop.Infrastructure;
-using WebShop.Model;
 using WebShop.Resource;
+using WSView.Engine;
+using WSView.Model;
+using WSView.Resource;
 
-namespace WebShop.Manager
+namespace WSView.Manager
 {
-    public class CustomerManager
+    public class CustomerManager: ICustomerManager
     {
         private readonly CustomerDA customerDA = new CustomerDA();
+        private readonly CustomerValidationEngine customerValidationEngine = new CustomerValidationEngine();
 
-        public void CreateCustomer(Customer customer)
+        public ValidationError[] CreateCustomer(Customer customer)
         {
 
-            customerDA.Insert(customer);
+            ValidationError[] errors = customerValidationEngine.ValidateUsername(customer.Username);
 
+            if(errors.Length == 0)
+                customerDA.Insert(customer);
+
+            return errors;
         }
 
     }

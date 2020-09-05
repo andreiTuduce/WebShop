@@ -56,6 +56,8 @@ namespace WebShop.Infrastructure
                             {
                                 for (int i = 0; i < reader.FieldCount; i++)
                                 {
+
+                                    //Map the objects and put the correct values from the DB in the model
                                     result.Add((T)reader.GetValue(i));
                                 }
                             }

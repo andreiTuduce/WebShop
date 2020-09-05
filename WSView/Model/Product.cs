@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebShop.Model
+namespace WSView.Model
 {
     public class Product
     {

@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using WebShop.Infrastructure;
-using WebShop.Model;
+using WSView.Model;
 
 namespace WebShop.Resource
 {

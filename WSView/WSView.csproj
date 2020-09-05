@@ -56,11 +56,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Engine\CustomerValidationEngine.cs" />
     <Compile Include="Manager\CustomerManager.cs" />
+    <Compile Include="Manager\ICustomerManager.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductReview.cs" />
+    <Compile Include="Model\ValidationError.cs" />
     <Compile Include="Resource\CustomerDA.cs" />
     <Compile Include="Resource\OrderDA.cs" />
     <Compile Include="Resource\ProductDA.cs" />

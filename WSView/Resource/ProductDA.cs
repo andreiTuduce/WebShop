@@ -2,9 +2,9 @@
 using System.Configuration;
 using System.Linq;
 using WebShop.Infrastructure;
-using WebShop.Model;
+using WSView.Model;
 
-namespace WebShop.Resource
+namespace WSView.Resource
 {
 
     public interface IProductDA

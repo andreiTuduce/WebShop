@@ -15,8 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebShop.Infrastructure;
-using WebShop.Manager;
-using WebShop.Model;
+using WSView.Manager;
+using WSView.Model;
 
 namespace WSView
 {
@@ -38,19 +38,25 @@ namespace WSView
 
             string firstName = FirstName.Text;
             string lastName = LastName.Text;
+            string username = Username.Text;
             string password = Password.Password.GetHashedString();
             string confirmPassword = ConfirmPassword.Password.GetHashedString();
 
+            Model.ValidationError[] errors = new Model.ValidationError[0];
 
             if (password == confirmPassword)
-                customerManager.CreateCustomer(new Customer
+               errors = customerManager.CreateCustomer(new Customer
                 {
                     ID = Guid.NewGuid(),
                     FirstName = firstName,
                     LastName = lastName,
                     CustomerType = CustomerType.New,
-                    Password = password
+                    Password = password,
+                    Username = username
                 });
+
+            if (errors.Length > 0)
+                MessageBox.Show(errors[0].ValidationMessage);
         }
     }
 }

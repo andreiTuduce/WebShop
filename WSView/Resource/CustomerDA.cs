@@ -2,13 +2,15 @@
 using System.Configuration;
 using System.Linq;
 using WebShop.Infrastructure;
-using WebShop.Model;
+using WSView.Model;
 
-namespace WebShop.Resource
+namespace WSView.Resource
 {
     public interface ICustomerDA
     {
         Customer SelectByID(Guid id);
+
+        Customer SelectByUsername(string username);
 
         void Insert(Customer customer);
 
@@ -26,12 +28,17 @@ namespace WebShop.Resource
 
         public Customer SelectByID(Guid id)
         {
-            return DataAccessHelper.Select<Customer>(config, string.Format("SELECT * FROM Customer WHERE ID = {0}", id)).FirstOrDefault();
+            return DataAccessHelper.Select<Customer>(config, string.Format("SELECT * FROM Customer WHERE ID = '{0}'", id)).FirstOrDefault();
+        }
+
+        public Customer SelectByUsername(string username)
+        {
+            return DataAccessHelper.Select<Customer>(config, string.Format("SELECT * FROM Customer WHERE Username = '{0}'", username)).FirstOrDefault();
         }
 
         public void Insert(Customer customer)
         {
-            string sql = string.Format("INSERT INTO Customer(ID, FirstName, LastName, Type, Password) VALUES ('{0}', '{1}', '{2}', {3}, '{4}')", customer.ID, customer.FirstName, customer.LastName, (int)customer.CustomerType, customer.Password);
+            string sql = string.Format("INSERT INTO Customer(ID, FirstName, LastName, Type, Password, Username) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}')", customer.ID, customer.FirstName, customer.LastName, (int)customer.CustomerType, customer.Password, customer.Username);
 
             DataAccessHelper.Insert(config, sql);
         }

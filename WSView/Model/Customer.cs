@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebShop.Model
+namespace WSView.Model
 {
     public class Customer
     {
@@ -9,6 +9,8 @@ namespace WebShop.Model
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public string Username { get; set; }
 
         public CustomerType CustomerType { get; set; }
 

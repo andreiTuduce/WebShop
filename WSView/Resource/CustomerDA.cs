@@ -38,14 +38,14 @@ namespace WSView.Resource
 
         public void Insert(Customer customer)
         {
-            string sql = string.Format("INSERT INTO Customer(ID, FirstName, LastName, Type, Password, Username) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}')", customer.ID, customer.FirstName, customer.LastName, (int)customer.CustomerType, customer.Password, customer.Username);
+            string sql = string.Format("INSERT INTO Customer(ID, FirstName, LastName, CustomerType, Password, Username) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}')", customer.ID, customer.FirstName, customer.LastName, (int)customer.CustomerType, customer.Password, customer.Username);
 
             DataAccessHelper.Insert(config, sql);
         }
 
         public void Update(Customer customer)
         {
-            string sql = string.Format("UPDATE Customer SET FirstName = {0}, LastName = {1}, Type = {2} WHERE ID = '{3}'", customer.FirstName, customer.LastName, customer.CustomerType, customer.ID);
+            string sql = string.Format("UPDATE Customer SET FirstName = {0}, LastName = {1}, CustomerType = {2} WHERE ID = '{3}'", customer.FirstName, customer.LastName, customer.CustomerType, customer.ID);
 
             DataAccessHelper.Update(config, sql);
         }

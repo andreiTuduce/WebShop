@@ -17,46 +17,78 @@ using System.Windows.Shapes;
 using WebShop.Infrastructure;
 using WSView.Manager;
 using WSView.Model;
+using WSView.View;
+using WSView.View.Helper;
 
 namespace WSView
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly CustomerManager customerManager;
+        private readonly RegistrationView registrationView;
 
         public MainWindow()
         {
             InitializeComponent();
-            customerManager = new CustomerManager();
+            registrationView = new RegistrationView();
+        }
+
+        private void AddControl(object sender, RoutedEventArgs e)
+        {
+
+            (TextBox[] textBoxes, PasswordBox[] passwordBoxes) = registrationView.ChangeViewToRegistration();
+
+            foreach (TextBox textBox in textBoxes)
+            {
+                MainGrid.Children.Add(textBox);
+
+            }
+
+            foreach (PasswordBox passwordBox in passwordBoxes)
+            {
+                MainGrid.Children.Add(passwordBox);
+            }
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
+            Customer customer = new Customer { ID = Guid.NewGuid(), CustomerType = CustomerType.New };
 
-            string firstName = FirstName.Text;
-            string lastName = LastName.Text;
-            string username = Username.Text;
-            string password = Password.Password.GetHashedString();
-            string confirmPassword = ConfirmPassword.Password.GetHashedString();
+            string password = string.Empty;
+            string confirmPassword = string.Empty;
 
-            Model.ValidationError[] errors = new Model.ValidationError[0];
+            foreach (UIElement element in MainGrid.Children)
+            {
+                TextBox textBox = element as TextBox;
 
-            if (password == confirmPassword)
-               errors = customerManager.CreateCustomer(new Customer
-                {
-                    ID = Guid.NewGuid(),
-                    FirstName = firstName,
-                    LastName = lastName,
-                    CustomerType = CustomerType.New,
-                    Password = password,
-                    Username = username
-                });
+                if (textBox != null)
 
-            if (errors.Length > 0)
-                MessageBox.Show(errors[0].ValidationMessage);
+                    switch (textBox.Name)
+                    {
+                        case TextBoxHelper.FirstName:
+                            customer.FirstName = textBox.Text;
+                            break;
+                        case TextBoxHelper.LastName:
+                            customer.LastName = textBox.Text;
+                            break;
+                        case TextBoxHelper.Username:
+                            customer.Username = textBox.Text;
+                            break;
+                        case TextBoxHelper.Password:
+                            password = textBox.Text;
+                            break;
+                        case TextBoxHelper.ConfirmPassword:
+                            confirmPassword = textBox.Text;
+                            break;
+                    }
+            }
+
+            if (password.GetHashedString() == confirmPassword.GetHashedString())
+            {
+                customer.Password = password.GetHashedString();
+                registrationView.Register(customer);
+            }
+            else
+                MessageBox.Show("Passwords do not match!");
         }
     }
 }

@@ -58,24 +58,7 @@ namespace WebShop.Infrastructure
                         {
                             while (reader.Read())
                             {
-                                var objectToAdd = (T) Activator.CreateInstance(typeof(T), new object[] { });
-
-                                for (int i = 0; i < reader.FieldCount; i++)
-                                {
-                                    string fieldName = reader.GetName(i);
-
-                                    PropertyInfo propertyInfo = propertyInfos.FirstOrDefault(prop => prop.Name.ToLower() == fieldName.ToLower());
-
-                                    if(propertyInfo != null)
-                                    {
-                                        if(reader[i] != DBNull.Value)
-                                        {
-                                            propertyInfo.SetValue(objectToAdd, reader[i], null);
-                                        }
-                                    }
-                                }
-
-                                objectsToReturn.Add(objectToAdd);
+                                StoreObject(objectsToReturn, propertyInfos, reader);
                             }
                         }
                     }
@@ -87,6 +70,28 @@ namespace WebShop.Infrastructure
             {
                 throw ThrowThis(ex, sql);
             }
+        }
+
+        private static void StoreObject<T>(List<T> objectsToReturn, PropertyInfo[] propertyInfos, SqlDataReader reader)
+        {
+            T objectToAdd = (T)Activator.CreateInstance(typeof(T), new object[] { });
+
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                string fieldName = reader.GetName(i);
+
+                PropertyInfo propertyInfo = propertyInfos.FirstOrDefault(prop => prop.Name.ToLower() == fieldName.ToLower());
+
+                if (propertyInfo != null)
+                {
+                    if (reader[i] != DBNull.Value)
+                    {
+                        propertyInfo.SetValue(objectToAdd, reader[i], null);
+                    }
+                }
+            }
+
+            objectsToReturn.Add(objectToAdd);
         }
 
         private static Exception ThrowThis(Exception ex, string sql)

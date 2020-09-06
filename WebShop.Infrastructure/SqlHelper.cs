@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Reflection;
 
 namespace WebShop.Infrastructure
 {
@@ -39,7 +41,9 @@ namespace WebShop.Infrastructure
         {
             try
             {
-                List<T> result = new List<T>();
+                List<object> results = new List<object>();
+                List<T> objectsToReturn = new List<T>();
+                PropertyInfo[] propertyInfos = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
                 using (SqlConnection connection = new SqlConnection(config.ConnectionString))
                 {
@@ -54,18 +58,30 @@ namespace WebShop.Infrastructure
                         {
                             while (reader.Read())
                             {
+                                var objectToAdd = (T) Activator.CreateInstance(typeof(T), new object[] { });
+
                                 for (int i = 0; i < reader.FieldCount; i++)
                                 {
+                                    string fieldName = reader.GetName(i);
 
-                                    //Map the objects and put the correct values from the DB in the model
-                                    result.Add((T)reader.GetValue(i));
+                                    PropertyInfo propertyInfo = propertyInfos.FirstOrDefault(prop => prop.Name.ToLower() == fieldName.ToLower());
+
+                                    if(propertyInfo != null)
+                                    {
+                                        if(reader[i] != DBNull.Value)
+                                        {
+                                            propertyInfo.SetValue(objectToAdd, reader[i], null);
+                                        }
+                                    }
                                 }
+
+                                objectsToReturn.Add(objectToAdd);
                             }
                         }
                     }
                 }
 
-                return result;
+                return objectsToReturn;
             }
             catch (Exception ex)
             {

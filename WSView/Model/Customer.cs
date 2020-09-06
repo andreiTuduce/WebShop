@@ -10,11 +10,11 @@ namespace WSView.Model
 
         public string LastName { get; set; }
 
-        public string Username { get; set; }
-
         public CustomerType CustomerType { get; set; }
 
         public string Password { get; set; }
+
+        public string Username { get; set; }
     }
 
     public enum CustomerType

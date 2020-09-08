@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using WebShop.Infrastructure;
-using WebShop.Resource;
-using WSView.Engine;
+﻿using WSView.Engine;
 using WSView.Model;
 using WSView.Resource;
 
@@ -27,6 +18,11 @@ namespace WSView.Manager
                 customerDA.Insert(customer);
 
             return errors;
+        }
+
+        public Customer GetCustomer(string username)
+        {
+            return customerDA.SelectByUsername(username);
         }
 
     }

@@ -1,21 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WebShop.Infrastructure;
-using WSView.Manager;
 using WSView.Model;
 using WSView.View;
 using WSView.View.Helper;
@@ -24,18 +10,20 @@ namespace WSView
 {
     public partial class MainWindow : Window
     {
-        private readonly RegistrationView registrationView;
+        private readonly RegistrationView registrationView = new RegistrationView();
+        private readonly LoginView loginView = new LoginView();
+        private Customer customerDetails;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            registrationView = new RegistrationView();
         }
 
         private void AddControl(object sender, RoutedEventArgs e)
         {
 
-            (TextBox[] textBoxes, PasswordBox[] passwordBoxes) = registrationView.ChangeViewToRegistration();
+            (TextBox[] textBoxes, PasswordBox[] passwordBoxes) = registrationView.GetControls();
 
             foreach (TextBox textBox in textBoxes)
             {
@@ -49,6 +37,74 @@ namespace WSView
             }
         }
 
+        private void AddLoginControl(object sender, RoutedEventArgs e)
+        {
+            (TextBox[] textBoxes, PasswordBox[] passwordBoxes) = loginView.GetControls();
+
+            foreach (TextBox textBox in textBoxes)
+            {
+                MainGrid.Children.Add(textBox);
+
+            }
+
+            foreach (PasswordBox passwordBox in passwordBoxes)
+            {
+                MainGrid.Children.Add(passwordBox);
+            }
+        }
+
+        private void Login(object sender, RoutedEventArgs e)
+        {
+            string username = null;
+            string password = null;
+
+            foreach (UIElement element in MainGrid.Children)
+            {
+                if (element is TextBox textBox)
+                {
+                    switch (textBox.Name)
+                    {
+                        case TextBoxHelper.Username:
+                            username = textBox.Text;
+                            break;
+                    }
+                }
+
+                if (element is PasswordBox passwordBox)
+                {
+                    switch (passwordBox.Name)
+                    {
+                        case TextBoxHelper.Password:
+                            password = passwordBox.Password.GetHashedString();
+                            break;
+                    }
+                }
+
+            }
+
+            if (!string.IsNullOrWhiteSpace(username))
+            {
+                customerDetails = loginView.LoginCustomer(username);
+
+                if (customerDetails == null)
+                {
+                    MessageBox.Show("This user does not exist!");
+                    return;
+                }
+
+                if (customerDetails.Password == password)
+                {
+                    //go to next window
+                }
+                else
+                {
+                    MessageBox.Show("Password or username incorrect!");
+                }
+            }
+
+
+        }
+
         private void OnClick(object sender, RoutedEventArgs e)
         {
             Customer customer = new Customer { ID = Guid.NewGuid(), CustomerType = CustomerType.New };
@@ -58,9 +114,7 @@ namespace WSView
 
             foreach (UIElement element in MainGrid.Children)
             {
-                TextBox textBox = element as TextBox;
-
-                if (textBox != null)
+                if (element is TextBox textBox)
 
                     switch (textBox.Name)
                     {
@@ -73,16 +127,23 @@ namespace WSView
                         case TextBoxHelper.Username:
                             customer.Username = textBox.Text;
                             break;
+                    }
+
+                if (element is PasswordBox passwordBox)
+                {
+                    switch (passwordBox.Name)
+                    {
                         case TextBoxHelper.Password:
-                            password = textBox.Text;
+                            password = passwordBox.Password;
                             break;
                         case TextBoxHelper.ConfirmPassword:
-                            confirmPassword = textBox.Text;
+                            confirmPassword = passwordBox.Password;
                             break;
                     }
+                }
             }
 
-            if (password.GetHashedString() == confirmPassword.GetHashedString())
+            if (password == confirmPassword)
             {
                 customer.Password = password.GetHashedString();
                 registrationView.Register(customer);
@@ -90,5 +151,7 @@ namespace WSView
             else
                 MessageBox.Show("Passwords do not match!");
         }
+
+
     }
 }

@@ -7,6 +7,8 @@
         Title="MainWindow" Height="530" Width="900">
     <Grid x:Name="MainGrid">
         <Button Content="Register" HorizontalAlignment="Left" Margin="402,260,0,0" VerticalAlignment="Top" Width="75" Click="OnClick"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="402,304,0,0" VerticalAlignment="Top" Width="75" Click="Login"/>
         <Button Content="AddControl" HorizontalAlignment="Left" Margin="568,260,0,0" VerticalAlignment="Top" Width="75" Click="AddControl"/>
+        <Button Content="AddLoginControl" HorizontalAlignment="Left" Margin="249,260,0,0" VerticalAlignment="Top" Width="75" Click="AddLoginControl"/>
     </Grid>
 </Window>

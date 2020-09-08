@@ -26,7 +26,7 @@ namespace WSView.View
                 MessageBox.Show("Registration successfully!");
         }
 
-        public (TextBox[], PasswordBox[]) ChangeViewToRegistration()
+        public (TextBox[], PasswordBox[]) GetControls()
         {
             List<TextBox> textBoxes = new List<TextBox>();
             List<PasswordBox> passwordBoxes = new List<PasswordBox>();

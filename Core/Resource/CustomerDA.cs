@@ -1,6 +1,5 @@
 ﻿using Core.Model;
 using System;
-using System.Configuration;
 using System.Linq;
 using WebShop.Infrastructure;
 

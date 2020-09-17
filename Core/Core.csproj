@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7707BA87-4E35-4AE5-8885-1D06DA34AFB2}</ProjectGuid>
+    <ProjectGuid>{FB1F2FC9-3A89-4002-9219-0576A2DFFEFA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WebShop.Infrastructure</RootNamespace>
-    <AssemblyName>WebShop.Infrastructure</AssemblyName>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,16 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs" />
-    <Compile Include="DataAccessHelper.cs" />
-    <Compile Include="IConfig.cs" />
+    <Compile Include="Manager\CustomerManager.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductReview.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlHelper.cs" />
-    <Compile Include="EncryptingExtensions.cs" />
+    <Compile Include="Resource\CustomerDA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebShop.Infrastructure\WebShop.Infrastructure.csproj">
+      <Project>{7707ba87-4e35-4ae5-8885-1d06da34afb2}</Project>
+      <Name>WebShop.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

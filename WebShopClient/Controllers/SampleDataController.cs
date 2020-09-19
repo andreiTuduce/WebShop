@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Manager;
 using Microsoft.AspNetCore.Mvc;
+using WebShopClient.Controllers.Models;
 
 namespace WebShopClient.Controllers
 {
@@ -30,9 +31,18 @@ namespace WebShopClient.Controllers
         }
 
         [HttpPost("[action]")]
-        public void TestMethod()
+        public void CreateCustomer([FromBody] Customer customer)
         {
-            customerManager.CreateCustomer();
+
+            Core.Model.Customer customerCore = new Core.Model.Customer
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Username = customer.Username,
+                Password = customer.Password
+            };
+
+            customerManager.CreateCustomer(customerCore);
         }
 
         public class WeatherForecast

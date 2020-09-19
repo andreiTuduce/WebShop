@@ -8,20 +8,12 @@ namespace Core.Manager
     {
         private readonly CustomerDA customerDA = new CustomerDA();
 
-        public void CreateCustomer(/*Customer customer*/)
+        public void CreateCustomer(Customer customer)
         {
-            customerDA.Insert(new Customer
-            {
-                ID = Guid.NewGuid(),
-                FirstName = "TestingWPF",
-                LastName = "TestingWPF",
-                CustomerType = CustomerType.Old,
-                Password = "Test",
-                Username = "username"
-            });
-
-            //customerDA.Insert(customer);
-
+            customer.ID = Guid.NewGuid();
+            customer.CustomerType = CustomerType.New;
+            
+            customerDA.Insert(customer);
         }
 
     }

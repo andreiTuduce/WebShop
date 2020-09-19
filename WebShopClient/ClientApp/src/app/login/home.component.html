@@ -1,0 +1,21 @@
+<div [formGroup]="formGroup">
+  <ng-container *ngFor="let field of fields">
+
+    <div *ngIf="field.dataType == dataType.text">
+      <label>{{field.name}}</label>
+      <input type="text" formControlName="{{field.name}}" value="{{field.value}}" required="{{field.required}}" minlength="{{field.minLength}}" maxlength="{{field.maxLength}}"/>
+    </div>
+
+    <div *ngIf="field.dataType == dataType.number">
+      <label>{{field.name}}</label>
+      <input type="number" formControlName="{{field.name}}" value="{{field.value}}" required="{{field.required}}" minlength="{{field.minLength}}" maxlength="{{field.maxLength}}"/>
+    </div>
+
+    <div *ngIf="field.dataType == dataType.password">
+      <label>{{field.name}}</label>
+      <input type="password" formControlName="{{field.name}}" value="{{field.value}}" required="{{field.required}}" minlength="{{field.minLength}}" maxlength="{{field.maxLength}}"/>
+    </div>
+
+  </ng-container>
+  <button type="submit" (click)="update()">Update</button>
+</div>

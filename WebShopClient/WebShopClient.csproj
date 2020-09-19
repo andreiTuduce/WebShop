@@ -29,7 +29,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\core\login-service.ts" />
+    <None Remove="ClientApp\src\app\core\models\customer-model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\shared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\core\models\customer-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\core\services\login-service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -7,7 +7,6 @@ namespace WebShop.Infrastructure
 {
     public static class EncryptingExtensions
     {
-
         private static readonly string toSaltValue = "QwzWSdfAWdc12ZSSAWy";
 
         public static string GetHashedString(this string str)

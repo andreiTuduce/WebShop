@@ -29,8 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\core\layout.component.ts" />
     <None Remove="ClientApp\src\app\core\login-service.ts" />
+    <None Remove="ClientApp\src\app\core\models\core-models.ts" />
     <None Remove="ClientApp\src\app\core\models\customer-model.ts" />
+    <None Remove="ClientApp\src\app\login\login-module.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,8 +45,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\core\layout\layout.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\core\models\core-models.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\core\models\customer-model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\core\services\login-service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\login\login-module.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

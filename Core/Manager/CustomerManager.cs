@@ -1,6 +1,7 @@
 ﻿using Core.Model;
 using Core.Resource;
 using System;
+using WebShop.Infrastructure;
 
 namespace Core.Manager
 {
@@ -12,6 +13,8 @@ namespace Core.Manager
         {
             customer.ID = Guid.NewGuid();
             customer.CustomerType = CustomerType.New;
+
+            customer.Password = customer.Password.GetHashedString();
             
             customerDA.Insert(customer);
         }
